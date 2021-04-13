@@ -47,6 +47,7 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
     style,
     itemRender,
     maxCount,
+    stopPropagationOnFileDrop = false
   } = props;
 
   const [mergedFileList, setMergedFileList] = useMergedState(defaultFileList || [], {
@@ -266,7 +267,9 @@ const InternalUpload: React.ForwardRefRenderFunction<unknown, UploadProps> = (pr
   };
 
   const onFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.stopPropagation();
+    if (stopPropagationOnFileDrop) {
+        e.stopPropagation();
+    }
     setDragState(e.type);
   };
 
